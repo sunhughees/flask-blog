@@ -1,6 +1,9 @@
 from flask import Flask, redirect, abort
+from flask.ext.script import Manager
 
 app = Flask(__name__)
+
+manager = Manager(app)
 
 @app.route('/')
 def index():
@@ -18,6 +21,7 @@ def baidu():
     return redirect('http://www.baidu.com')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+#    app.run(debug=True)
+    manager.run()
 
 
