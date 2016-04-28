@@ -16,7 +16,7 @@ class Resource(object):
         self.storage_path = storage_path
 
     def on_post(self, req, resp):
-        image_id = _generate_id()
+        image_id = generate_id()
         ext = _media_type_to_ext(req.content_type)
         filename = image_id + '.' + ext
 
