@@ -9,4 +9,4 @@ image_collection = images.Collection(storage_path)
 image_item = images.Item(storage_path)
 
 api.add_route('/images', image_collection)
-api.add_route('/images/(name)', image_item)
+api.add_route('/images/{name}', image_item)
