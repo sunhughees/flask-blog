@@ -7,10 +7,13 @@ import falcon
 def _media_type_to_ext(media_type):
     return media_type[6:]
 
+def _ext_to_media_type(ext):
+    return 'image/' + ext
+
 def _generate_id():
     return str(uuid.uuid4())
 
-class Resource(object):
+class Collection(object):
 
     def __init__(self, storage_path):
         self.storage_path = storage_path
@@ -31,3 +34,16 @@ class Resource(object):
 
         resp.status = falcon.HTTP_201
         resp.location = '/images/' + image_id
+
+class Item(object):
+
+    def __init__(self, storage_path):
+        self.storage_path = storage_path
+
+    def on_get(self, req, resp, name):
+        ext = os.path.splitext(name)[1][1:]
+        resp.content_type = _ext_to_media_type(ext)
+
+        image_path = os.path.join(self.storage_path, name)
+        resp.stream = open(image_path, 'rb')
+        resp.stream_len = os.path.getsize(image_path)
