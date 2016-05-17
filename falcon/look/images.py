@@ -1,17 +1,21 @@
 import os
-import time
+# import time
 import uuid
 
 import falcon
 
+
 def _media_type_to_ext(media_type):
     return media_type[6:]
+
 
 def _ext_to_media_type(ext):
     return 'image/' + ext
 
+
 def _generate_id():
     return str(uuid.uuid4())
+
 
 class Collection(object):
 
@@ -34,6 +38,7 @@ class Collection(object):
 
         resp.status = falcon.HTTP_201
         resp.location = '/images/' + image_id
+
 
 class Item(object):
 
