@@ -15,24 +15,33 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
-Class Role(db.Model):
+# Class Role(db.Model):  'C'-->'c'
+
+
+class Role(db.Model):
     __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(64), unique = True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), unique=True)
+    users = db.relationship('User', backref='role')
 
     def __repr__(self):
         return '<Role %r>' % self.name
 
-Class User(db.Model):
+
+class User(db.Model):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(64))
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 
 @app.route('/')
 def index():
     return render_template('index.html',
-                            current_time = datetime.utcnow())
+                           current_time=datetime.utcnow())
 
 
 @app.route('/user/<name>')
