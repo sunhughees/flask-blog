@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+      "electron-debug": "^0.1.1",
+      "material-ui": "^0.10.2",
+      "mqtt": "^1.1.5",
+      "react": "^0.13.3",
+      "react-bootstrap": "^0.22.3",
+      "react-router": "^0.13.3"
+  }
+}
